@@ -2,8 +2,8 @@
 
 $msg = '';
 if (isset($_POST['login'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+    $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 
     if (!empty(trim($username)) && !empty(trim($password))) {
         $query = "SELECT * FROM users WHERE username = '{$username}' AND password = '{$password}'";
@@ -14,15 +14,17 @@ if (isset($_POST['login'])) {
             $_SESSION['valid'] = true;
             $_SESSION['timeout'] = time();
             $_SESSION['username'] = $username;
-            header("Location:userDetails.php?user_id={$row['user_details_id']}");
-
+            $_SESSION['user_details_id'] = $row['user_details_id'];
+            header("Location:userDetails.php");
         } else {
             $msg = "Invalid Credential";
+            $_SESSION['valid'] = false;
         }
     } else {
         $msg = "Enter all field with * symbol";
     }
 }
+
 ?>
 
 <div class="container bg-light rounded py-2 mt-3">

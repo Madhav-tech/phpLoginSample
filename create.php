@@ -2,11 +2,11 @@
 
 $msg = '';
 if (isset($_POST['create'])) {
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $email = $_POST['email'];
+    $firstname = filter_var($_POST['firstname'], FILTER_SANITIZE_STRING);
+    $lastname = filter_var($_POST['lastname'], FILTER_SANITIZE_STRING);
+    $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+    $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 
     if (!empty($firstname) && !empty(trim($username)) && !empty(trim($password)) && !empty($email)) {
         

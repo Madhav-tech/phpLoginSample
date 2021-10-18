@@ -2,7 +2,7 @@
 <?php
 
 if ($_SESSION['valid']) {
-    $user_id = $_GET['user_id'];
+    $user_id = $_SESSION['user_details_id'];
 
     $query = "SELECT * FROM user_details WHERE user_id = '{$user_id}'";
     $result = mysqli_query($connection, $query);
@@ -11,6 +11,7 @@ if ($_SESSION['valid']) {
     $firstName = $row['first_name'];
     $lastName = $row['last_name'];
     $email = $row['email'];
+    
 } else {
     header("Location:index.php?source=false");
 }
