@@ -4,9 +4,8 @@
 if ($_SESSION['valid']) {
     $user_id = $_SESSION['user_details_id'];
 
-    $query = "SELECT * FROM user_details WHERE user_id = '{$user_id}'";
-    $result = mysqli_query($connection, $query);
-    $row = mysqli_fetch_assoc($result);
+    $userDatils = new UserDetails();
+    $row = $userDatils->getDetailsFromId($user_id);
 
     $firstName = $row['first_name'];
     $lastName = $row['last_name'];

@@ -2,7 +2,7 @@
 $home = "";
 $loginText = "./logout.php";
 $text = "Logout";
-if (!$_SESSION['valid']) {
+if (!isset($_SESSION['valid']) || !$_SESSION['valid']) {
     $home = "../login";
     $loginText = "../login";
     $text = "Login";
@@ -17,7 +17,7 @@ if (!$_SESSION['valid']) {
         </button>
         <div class="collapse navbar-collapse" id="loginId">
             <ul class="navbar-nav me-auto">
-                <?php if (!$_SESSION['valid']) {
+                <?php if (!isset($_SESSION['valid']) || !$_SESSION['valid']) {
                     echo "<li class='nav-item'><a href='index.php?source=create' class='nav-link'>Create account</a></li>";
                 }
                 ?>

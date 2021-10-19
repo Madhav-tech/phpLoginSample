@@ -1,5 +1,7 @@
 <?php include_once "db/config.php";
 session_start();
+$db = new DbConfig();
+$connection = $db->getConnection();
 ?>
 
 <!DOCTYPE html>

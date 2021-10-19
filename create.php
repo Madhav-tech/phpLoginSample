@@ -9,22 +9,14 @@ if (isset($_POST['create'])) {
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 
     if (!empty($firstname) && !empty(trim($username)) && !empty(trim($password)) && !empty($email)) {
-        
+        $usersDetails = new UserDetails();
+        $user = new Users();
         //avoid auto increment to user_id by getting number of rows in table;
-        $sql = "select * from user_details";
-        $result = mysqli_query($connection, $sql);
-        $no_of_row = mysqli_num_rows($result);
-
-        $id = $no_of_row + 1;
-
+        $id = $usersDetails->getCountofUsers() + 1;
         //insert into user_details table
-        $query = "INSERT INTO user_details (user_id, first_name, last_name, email) VALUES ('{$id}','{$firstname}', '{$lastname}', '{$email}')";
-        $result = mysqli_query($connection, $query);
-
+        $usersDetails->insertIntoDetail($id, $firstname, $lastname, $email);
         //insert into users table
-        $query = "INSERT INTO users ( username, password, user_details_id) VALUES ('{$username}', '{$password}', '{$id}')";
-        $result = mysqli_query($connection, $query);
-
+        $user->insertIntoUsers($username, $password, $id);
         $msg =  "User Registered Sucessfully";
     } else {
         $msg = "Enter all field with * symbol";

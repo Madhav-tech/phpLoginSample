@@ -8,26 +8,22 @@ if (isset($_POST['forgot'])) {
     $lastname = filter_var($_POST['lastname'], FILTER_SANITIZE_STRING);
 
     if (!empty(trim($username)) && !empty(trim($lastname))) {
-        $query = "SELECT * FROM users WHERE username = '{$username}' AND lastname = '{$lastname}'";
+        $query = "SELECT * FROM users join user_details on Id = user_id WHERE username = '{$username}' AND last_name = '{$lastname}'";
         $result = mysqli_query($connection, $query);
+        if (!$result) {
+            die(mysqli_error($connection));
+        }
         $no_of_row = mysqli_num_rows($result);
         $row = mysqli_fetch_assoc($result);
         if ($no_of_row > 0) {
-            $_SESSION['valid'] = true;
-            $_SESSION['timeout'] = time();
-            $_SESSION['username'] = $username;
-            $_SESSION['user_details_id'] = $row['user_details_id'];
-            header("Location:userDetails.php");
+            echo "<p class='bg-light text-center mt-3'>Your Password is:- {$row['password']}<p>";
         } else {
-            $msg = "Invalid Credential";
-            $_SESSION['valid'] = false;
+            $msg = "Invalid Details";
         }
     } else {
         $msg = "Enter all field with * symbol";
     }
 }
-
-
 ?>
 <div class="text-center mb-3">
     <h3>Forgot Password</h3>
@@ -43,5 +39,8 @@ if (isset($_POST['forgot'])) {
             <input type="text" class="form-control" name="username" placeholder="Enter Username">
         </div>
         <input class="btn btn-outline-success text-dark" type="submit" name="forgot" id="" value="Know Your Password">
+        <div class="d-flex justify-content-center TextShadow my-0">
+            <?= $msg ?>
+        </div>
     </form>
 </div>

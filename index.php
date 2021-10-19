@@ -5,10 +5,9 @@
     if (isset($_GET['source'])) {
         $source = $_GET['source'];
         if ($source == 'false') {
-            echo "<h2 class = 'text-center' id='error'>Access Denied</h2><span class = 'text-center' id='error'>Please Login First</span>";
+            echo "<h3 class = 'text-center' id='error'>Access Denied</h3><span class = 'text-center' id='error'>Please Login First</span>";
         }
     }
-
 
     ?>
     <div class=" col-lg-8 bg-info rounded my-3">

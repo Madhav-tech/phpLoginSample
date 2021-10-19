@@ -6,10 +6,13 @@ if (isset($_POST['login'])) {
     $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 
     if (!empty(trim($username)) && !empty(trim($password))) {
-        $query = "SELECT * FROM users WHERE username = '{$username}' AND password = '{$password}'";
-        $result = mysqli_query($connection, $query);
+
+        $user = new Users();
+
+        $result = $user->getUser($username, $password);
         $no_of_row = mysqli_num_rows($result);
         $row = mysqli_fetch_assoc($result);
+
         if ($no_of_row > 0) {
             $_SESSION['valid'] = true;
             $_SESSION['timeout'] = time();
