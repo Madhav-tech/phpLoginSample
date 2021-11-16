@@ -9,16 +9,21 @@ if (isset($_POST['login'])) {
 
         $user = new Users();
 
-        $result = $user->getUser($username, $password);
+        
+        $result = $user->getUser($username);
         $no_of_row = mysqli_num_rows($result);
         $row = mysqli_fetch_assoc($result);
 
-        if ($no_of_row > 0) {
+       $returnedPassword =  $row['password'];
+
+       password_verify($password,$returnedPassword);
+
+        if ( password_verify($password,$returnedPassword)) {
             $_SESSION['valid'] = true;
             $_SESSION['timeout'] = time();
             $_SESSION['username'] = $username;
             $_SESSION['user_details_id'] = $row['user_details_id'];
-            header("Location:userDetails.php");
+            header("Location:Allpost.php");
         } else {
             $msg = "Invalid Credential";
             $_SESSION['valid'] = false;

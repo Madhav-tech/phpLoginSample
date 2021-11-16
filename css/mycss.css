@@ -1,25 +1,67 @@
-
-
 nav {
-    background-image: linear-gradient( rgb(245, 147, 90), rgb(190, 168, 42), rgb(6, 189, 240));
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: rgb(250, 15, 15);
-  }
+  background-image: linear-gradient(
+    rgb(245, 147, 90),
+    rgb(190, 168, 42),
+    rgb(6, 189, 240)
+  );
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(250, 15, 15);
+  position: sticky;
+}
 .TextShadow {
-    text-shadow: 2px 2px rgb(228, 107, 107);
-  } 
-  .card {
-    background-image: linear-gradient(to bottom right, rgb(248, 194, 194), rgba(255,0,0,0), rgb(196, 139, 139));
-  }
-  html, body {
-    margin: 0;
-    height: 100%;
-    background-color: aquamarine;
+  text-shadow: 2px 2px rgb(228, 107, 107);
+}
+.card {
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(248, 194, 194),
+    rgba(255, 0, 0, 0),
+    rgb(196, 139, 139)
+  );
+}
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
 }
 .required:after {
-  content:"*";
+  content: "*";
   color: red;
 }
-#error{
+#error {
   color: red;
+}
+#postdiv {
+  height: 100%;
+}
+#posttext {
+  font-size: 18px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+#profilePicture {
+  border-radius: 50%;
+}
+#userDetails {
+  background-color: rgba(245, 222, 179, 0.7);
+  min-height: 41%;
+}
+#post2 {
+  background-color: rgb(255, 228, 255);
+  border-radius: 10%;
+}
+#postImg {
+  width: 100%;
+  height: 300px;
+}
+#date {
+  font-family: monospace;
+}
+#name {
+  color: black;
+  text-decoration: none;
+}
+#addpost {
+  background-color: rgb(255, 228, 255);
+  border-radius: 10%;
 }

@@ -8,15 +8,23 @@ if (isset($_POST['create'])) {
     $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 
+    $user_image = $_FILES['image']['name'];
+    $user_image_temp = $_FILES['image']['tmp_name'];
+
     if (!empty($firstname) && !empty(trim($username)) && !empty(trim($password)) && !empty($email)) {
         $usersDetails = new UserDetails();
         $user = new Users();
         //avoid auto increment to user_id by getting number of rows in table;
         $id = $usersDetails->getCountofUsers() + 1;
         //insert into user_details table
-        $usersDetails->insertIntoDetail($id, $firstname, $lastname, $email);
+        $usersDetails->insertIntoDetail($id, $firstname, $lastname, $email, $user_image);
         //insert into users table
+
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
         $user->insertIntoUsers($username, $password, $id);
+        move_uploaded_file($user_image_temp, "image/$user_image");
+
         $msg =  "User Registered Sucessfully";
     } else {
         $msg = "Enter all field with * symbol";
@@ -26,7 +34,7 @@ if (isset($_POST['create'])) {
 
 <div class="container p-5 mt-2" style="height: 80%;">
     <h2 class="text-light TextShadow">Enter Your Details</h2>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <div class=" row d-flex ">
             <div class="col-lg-6">
                 <div class="input-group mb-3">
@@ -41,9 +49,18 @@ if (isset($_POST['create'])) {
                 </div>
             </div>
         </div>
-        <div class="input-group mb-3">
-            <div class="input-group-text required">Email</div>
-            <input type="email" class="form-control" name="email">
+        <div class="row d-flex ">
+            <div class="col-lg-6">
+                <div class=" input-group mb-3">
+                    <div class="input-group-text required">Email</div>
+                    <input type="email" class="form-control" name="email">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="col-lg-6 input-group mb-3">
+                    <input type="file" class="form-control" name="image">
+                </div>
+            </div>
         </div>
         <div class=" row d-flex mt-3 ">
             <div class="col-lg-6">

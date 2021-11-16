@@ -1,4 +1,9 @@
-<?php include "include/header.php"; ?>
+<?php include "include/header.php";
+ 
+if (isset($_SESSION['valid']) && $_SESSION['valid']) {
+    header("Location:post.php");
+}
+?>
 <div class="container-fluid row d-flex bg-light m-0" style="height: 92%;">
     <?php
     $source = "";
