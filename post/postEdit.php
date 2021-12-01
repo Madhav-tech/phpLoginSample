@@ -29,7 +29,7 @@ if (isset($_GET['edit_id'])) {
                 </div>
                 
                 <div class="input-group mb-3">
-                    <input type="file" class="form-control mb-3" name="image">
+                    <input type="file" class="form-control mb-3" name="image" accept="image/*">
                 </div>
                 <div class="mb-3">
                     <img class="img-fluid rounded" src="image/<?= $post_image ?>" alt="<?= $post_image ?>" width="300">

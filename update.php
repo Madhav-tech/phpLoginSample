@@ -80,14 +80,14 @@ if (isset($_POST['update'])) {
             </div>
             <div class="col-lg-6">
                 <div class="input-group mb-3">
-                    <input type="file" class="form-control mb-3" name="image">
+                    <input type="file" class="form-control mb-3" name="image" accept="image/*">
                 </div>
 
             </div>
             <div class="col-lg-6">
                 <div class="text-center mb-3">
 
-                    <img class="img-fluid rounded" src="image/<?= $user_image ?>" alt="<?= $post_image ?>" width="150">
+                    <img class="img-fluid rounded" src="image/<?= $user_image ?>" alt="<?= $user_image ?>" width="150">
                 </div>
             </div>
 

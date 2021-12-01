@@ -25,7 +25,8 @@ if (isset($_POST['create'])) {
         $user->insertIntoUsers($username, $password, $id);
         move_uploaded_file($user_image_temp, "image/$user_image");
 
-        $msg =  "User Registered Sucessfully";
+        $msg =  "true";
+        header("Location:index.php?created={$msg}");
     } else {
         $msg = "Enter all field with * symbol";
     }
@@ -37,13 +38,13 @@ if (isset($_POST['create'])) {
     <form action="" method="post" enctype="multipart/form-data">
         <div class=" row d-flex ">
             <div class="col-lg-6">
-                <div class="input-group mb-3">
+                <div class="input-group mb-3 ">
                     <div class="input-group-text required">First Name</div>
-                    <input type="text" class="form-control" name="firstname">
+                    <input id="firstname" type="text" class="form-control" name="firstname" onkeyup="inputCheckCreate();" onclick="inputCheckCreate();">
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="input-group mb-3">
+                <div class="input-group mb-3 ">
                     <div class="input-group-text">Last Name</div>
                     <input type="text" class="form-control" name="lastname">
                 </div>
@@ -51,34 +52,36 @@ if (isset($_POST['create'])) {
         </div>
         <div class="row d-flex ">
             <div class="col-lg-6">
-                <div class=" input-group mb-3">
+                <div class=" input-group mb-3 ">
                     <div class="input-group-text required">Email</div>
-                    <input type="email" class="form-control" name="email">
+                    <input id="email" type="email" class="form-control" name="email" onkeyup="inputCheckCreate();" onclick="inputCheckCreate();">
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="col-lg-6 input-group mb-3">
-                    <input type="file" class="form-control" name="image">
+                <div class="col-lg-6 input-group mb-3 ">
+                    <input type="file" class="form-control" name="image" accept="image/*">
                 </div>
             </div>
         </div>
         <div class=" row d-flex mt-3 ">
             <div class="col-lg-6">
-                <div class=" input-group mb-3">
+                <div id="p1" class="input-group mb-3  ">
                     <div class="input-group-text required">Username</div>
-                    <input type="text" class="form-control" name="username">
+                    <input id="new-username" type="text" class="form-control" name="username" onkeyup="inputCheckCreate();" onclick="inputCheckCreate();">
                 </div>
+                <div id="userExist"></div>
             </div>
             <div class="col-lg-6">
-                <div class=" input-group mb-3">
+                <div id="p1" class=" input-group mb-3 ">
                     <div class="input-group-text required">Password</div>
-                    <input type="text" class="form-control" name="password">
+                    <input id="new-password" type="text" class="form-control" name="password" onkeyup="inputCheckCreate();" onclick="inputCheckCreate();">
                 </div>
+                <div id="pwd-error"></div>
             </div>
         </div>
 
         <div class="d-flex justify-content-center btn-grop ">
-            <input class="btn btn-secondary mb-3" type="submit" name="create" id="create">
+            <input class="btn btn-secondary mb-3" type="submit" name="create" id="create" disabled>
         </div>
         <div class="d-flex justify-content-center text-red my-0" id="error">
             <?= $msg ?>

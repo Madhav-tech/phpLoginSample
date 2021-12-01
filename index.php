@@ -1,7 +1,7 @@
 <?php include "include/header.php";
  
 if (isset($_SESSION['valid']) && $_SESSION['valid']) {
-    header("Location:post.php");
+    header("Location:Allpost.php");
 }
 ?>
 <div class="container-fluid row d-flex bg-light m-0" style="height: 92%;">
@@ -22,10 +22,10 @@ if (isset($_SESSION['valid']) && $_SESSION['valid']) {
         <?php
         switch ($source) {
             case 'create':
-                include "create.php";
+                include "user/create.php";
                 break;
             case 'help':
-                include "help.php";
+                include "user/help.php";
                 break;
 
             default:
